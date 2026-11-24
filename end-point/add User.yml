@@ -1,0 +1,23 @@
+info:
+  name: add User
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: https://127.0.0.1:8001/api/user
+  body:
+    type: json
+    data: |-
+      {
+        "email": "user@example.com",
+        "plainPassword": "123456"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
