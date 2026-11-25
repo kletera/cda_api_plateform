@@ -40,4 +40,12 @@ class CategoryRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findCategory(){
+        return $this->createQueryBuilder('c')
+           ->orderBy('c.name', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+    }
 }

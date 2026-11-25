@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\GetCollection;
+use App\State\CategoryAlphabeticalProvider;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
 
@@ -25,7 +26,12 @@ use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
         new Post(
             uriTemplate:'/category',
             status: 301
-        )
+        ),
+        new GetCollection(
+            uriTemplate: '/categories/alphabetical',
+            provider: CategoryAlphabeticalProvider::class,
+            normalizationContext: ['groups' => ['category:alphabetical']],
+        ),
     ],
     order: ['id' => 'ASC', 'name' => 'ASC'],
     paginationEnabled: false
@@ -35,9 +41,11 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[AttributeGroups(['category:alphabetical'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50, nullable: false)]
+    #[AttributeGroups(['category:alphabetical'])]
     private ?string $name = null;
 
     public function getId(): ?int
