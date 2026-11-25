@@ -97,4 +97,15 @@ class BookRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByAuthor(string $author): array
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.author LIKE :author')
+            ->setParameter('author', '%' . $author . '%')
+            ->orderBy('b.title')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
