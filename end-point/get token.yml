@@ -5,13 +5,13 @@ info:
 
 http:
   method: GET
-  url: http://127.0.0.1:8001/api/login_check
+  url: http://127.0.0.1:8000/api/login_check
   body:
     type: json
     data: |-
       {
-        "username":"user2026@example.com",
-        "password":"123456"
+        "username":"admin@test.com",
+        "password":"admin32"
       }
   auth:
     type: bearer

@@ -1,0 +1,18 @@
+info:
+  name: get profil
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://127.0.0.1:8000/api/profil
+  auth:
+    type: bearer
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3OTU2MDI1NjEsImV4cCI6MTc5NTYwNjE2MSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQHRlc3QuY29tIn0.l646Plq9FKAaa6XW8SfPnqvBP3JB3eAwXEjHyB2HO1dK9UP2MnrJtoBa6_0n1QS3ahw97zxAe8-QX7TxZ6NOyfpj63r3VUU4gjt0mBS9ycdNt0gGjv6CHhgEKN0Aib_KnJ5ENAB3xCnLrTd2c9TfpDZ3oiNn6HVXCj2aIQ1ElseP4TEb3AfxANWybPzvJGucMhxFNVsBlSOxY-g-j7aDxPF9Ofz_aXioCQsmNO3teuj5mU32mwsPLZSDzOkiUOEWNEEKRA7mdH7vEpM_IhNkCXNFC4dIlhzTTjUPmbi3w1oT5SrLmR8xm9zSZ7_VKdyB9ASnpaWMA1yx-ywdTaY9cUMNvbP-ZHlVR1ZPHodAEC9sE3nYt05v7Z_bBmrxRMq_60zcPs1UTDyW72pEBND1wzzpG3TEkI_jVhiyDpFmOihwRrOLir0jdRDgTnPrbsyXwskP3DQRA8pWJTLlst-s05uWx0OeRDh7tJ-obcquRhUZJkCeJ6M6tTQplb1M3a8n5Mol0ceB86WfCKRwrC--92UR4igVkao0QBYZBI1PiSCX7L2Cv1IusBDpY5jAVBR1QVwhYr2MsAhIlDuE815062UjtYkploY6cel4n9kt5f-wTrvWpF197qzBeXuB8mGiYK5FcmDHgNR0uzyhN0DprMJdqdYxWqslGGIsT5hOMbw
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: true
