@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\GetCollection;
 use App\State\CategoryAlphabeticalProvider;
+use App\State\CategoryBooksProvider;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
 
@@ -31,6 +32,14 @@ use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
             uriTemplate: '/categories/alphabetical',
             provider: CategoryAlphabeticalProvider::class,
             normalizationContext: ['groups' => ['category:alphabetical']],
+        ),
+        new GetCollection(
+            uriTemplate: '/categories/{id}/books',
+            provider: CategoryBooksProvider::class,
+            output: Book::class,
+            normalizationContext: ['groups' => ['category:book']],
+            outputFormats: ['json' => ['application/json']],
+
         ),
     ],
     order: ['id' => 'ASC', 'name' => 'ASC'],

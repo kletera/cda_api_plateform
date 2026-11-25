@@ -2,20 +2,31 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\BookRepository;
+use App\State\CategoryBooksProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups as AttributeGroups;
 
+#[ApiResource(
+    operations: [
+        
+    ]
+)]
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[AttributeGroups(['category:book'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[AttributeGroups(['category:book'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -25,6 +36,7 @@ class Book
     private ?\DateTimeImmutable $publishAt = null;
 
     #[ORM\Column(length: 50)]
+    #[AttributeGroups(['category:book'])]
     private ?string $author = null;
 
     #[ORM\ManyToOne]
