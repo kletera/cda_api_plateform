@@ -13,7 +13,8 @@ http:
         "username":"user2026@example.com",
         "password":"123456"
       }
-  auth: inherit
+  auth:
+    type: bearer
 
 settings:
   encodeUrl: true

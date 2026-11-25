@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\State\ProfileProvider;
 
 #[ApiResource(
     operations: [
@@ -27,11 +28,17 @@ use Symfony\Component\Validator\Constraints as Assert;
         ),
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']]),
         new Get(),
+        new Get(
+            uriTemplate: '/profil',
+            outputFormats: ['json' => ['application/json']],
+            normalizationContext: ['groups' => ['user:profil']],
+            provider: ProfileProvider::class,
+        ),
         new Put(processor: UserPasswordHasher::class),
         new Patch(processor: UserPasswordHasher::class),
         new Delete(),
     ],
-    normalizationContext: ['groups' => ['user:list']],
+    normalizationContext: ['groups' => ['user:list', 'user:profil']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -39,16 +46,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity('email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[Groups(['user:read'])]
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
+    #[Groups(['user:read','user:profil'])]
     private ?int $id = null;
 
     #[Assert\NotBlank]
     #[Assert\Email]
-    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list', 'user:profil'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -59,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $plainPassword = null;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['user:read','user:profil'])]
     private array $roles = [];
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -69,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list', 'user:profil'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -80,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list', 'user:profil'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true, options:['default'=>'profil.png'])]
