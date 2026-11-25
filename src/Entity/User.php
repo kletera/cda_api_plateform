@@ -21,14 +21,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(
+            uriTemplate:'/users',
+            validationContext:['groups'=> ["user:list"]]
+        ),
         new Post(processor: UserPasswordHasher::class, validationContext: ['groups' => ['Default', 'user:create']]),
         new Get(),
         new Put(processor: UserPasswordHasher::class),
         new Patch(processor: UserPasswordHasher::class),
         new Delete(),
     ],
-    normalizationContext: ['groups' => ['user:read']],
+    normalizationContext: ['groups' => ['user:list']],
     denormalizationContext: ['groups' => ['user:create', 'user:update']],
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -44,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[Assert\NotBlank]
     #[Assert\Email]
-    #[Groups(['user:read', 'user:create', 'user:update'])]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
@@ -66,7 +69,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    #[Groups(['user:read', 'user:create', 'user:update'])]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -77,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    #[Groups(['user:read', 'user:create', 'user:update'])]
+    #[Groups(['user:read', 'user:create', 'user:update', 'user:list'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true, options:['default'=>'profil.png'])]
