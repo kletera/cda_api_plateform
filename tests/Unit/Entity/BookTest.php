@@ -16,13 +16,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $value = "test";
+        $expect = "test";
         //setter l'attribut
-        $testBook->setTitle($value);
+        $testBook->setTitle($expect);
         //2 Act
-        $result = $testBook->getTitle();
+        $actual  = $testBook->getTitle();
         //3 Assert
-        $this->assertSame($value, $result);
+        self::assertSame($expect, $actual );
     }
 
     public function testGetResumReturnGoodValue(): void
@@ -31,13 +31,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $value = "test";
+        $expect = "test";
         //setter l'attribut
-        $testBook->setResume($value);
+        $testBook->setResume($expect);
         //2 Act
-        $result = $testBook->getResume();
+        $actual  = $testBook->getResume();
         //3 Assert
-        $this->assertSame($value, $result);
+        self::assertSame($expect, $actual );
     }
 
     public function testGetAuthorReturnGoodValue(): void
@@ -46,13 +46,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $value = "test";
+        $expect = "test";
         //setter l'attribut
-        $testBook->setAuthor($value);
+        $testBook->setAuthor($expect);
         //2 Act
-        $result = $testBook->getAuthor();
+        $actual  = $testBook->getAuthor();
         //3 Assert
-        $this->assertSame($value, $result);
+        self::assertSame($expect, $actual );
     }
 
     public function testGetPublishAtReturnGoodValue(): void
@@ -61,13 +61,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $value = new DateTimeImmutable();
+        $expect = new DateTimeImmutable();
         //setter l'attribut
-        $testBook->setPublishAt($value);
+        $testBook->setPublishAt($expect);
         //2 Act
-        $result = $testBook->getPublishAt();
+        $actual  = $testBook->getPublishAt();
         //3 Assert
-        $this->assertSame($value, $result);
+        self::assertSame($expect, $actual );
     }
 
 
@@ -79,13 +79,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $result = "test";
-        $value = "test2";
+        $actual  = "test";
+        $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setTitle($value);
+        $resultat = $testBook->setTitle($expect);
         //2 Act
         //3 Assert
-        $this->assertNotSame($result, $result);
+        self::assertNotSame($expect , $actual );
     }
 
     public function testGetResumReturnInvalid(): void
@@ -94,13 +94,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $result = "test";
-        $value = "test2";
+        $actual  = "test";
+        $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setResume($value);
+        $resultat = $testBook->setResume($expect);
         //2 Act
         //3 Assert
-        $this->assertNotSame($result, $result);
+        self::assertNotSame($expect , $actual );
     }
 
     public function testGetAuthorReturnInvalid(): void
@@ -109,13 +109,13 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $result = "test";
-        $value = "test2";
+        $actual  = "test";
+        $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setAuthor($value);
+        $resultat = $testBook->setAuthor($expect);
         //2 Act
         //3 Assert
-        $this->assertNotSame($result, $result);
+        self::assertNotSame($expect , $actual );
     }
 
     public function testGePublishAtReturnInvalid(): void
@@ -124,12 +124,12 @@ class BookTest extends TestCase
         //créer un objet vide
         $testBook = new Book();
         //stocker le résultat attendu
-        $result = new DateTimeImmutable();
-        $value = new DateTimeImmutable("1982-09-21");
+        $actual  = new DateTimeImmutable();
+        $expect = new DateTimeImmutable("1982-09-21");
         //setter l'attribut
-        $resultat = $testBook->setPublishAt($value);
+        $resultat = $testBook->setPublishAt($expect);
         //2 Act
         //3 Assert
-        $this->assertNotSame($result, $result);
+        self::assertNotSame($expect , $actual );
     }
 }
