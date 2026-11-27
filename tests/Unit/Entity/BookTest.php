@@ -4,6 +4,7 @@ namespace App\Tests;
 
 use PHPUnit\Framework\TestCase;
 use App\Entity\Book;
+use App\Entity\Category;
 use DateTimeImmutable;
 
 class BookTest extends TestCase
@@ -183,4 +184,58 @@ class BookTest extends TestCase
         //2 Act
         $testBook->setPublishAt(["tests"]);
     }
+
+    //  Vérifier l’ajout et le retrait de catégories avec des objets en mémoire.
+    public function testAddCategoryStoresTheCategoryInstance(): void
+    {
+        // Arrange
+        $book = new Book();
+        $category = new Category();
+        $expected = [$category];
+
+        // Act
+        $book->addCategory($category);
+
+        // Assert
+        $actual = $book->getCategories()->toArray();
+        self::assertSame($expected, $actual);
+    }
+
+
+    public function testAddCategoryStoresTheCategoryInstanceCount(): void
+    {
+        // Arrange
+        $book = new Book();
+        $category = new Category();
+
+        // Act
+        $book->addCategory($category);
+        $book->addCategory($category);
+
+        // Assert
+        $actual = $book->getCategories()->toArray();
+        self::assertCount(1, $actual);
+    }
+
+    public function testCategoryContainDoublon(){
+        // Arrange
+        $book = new Book();
+        $category1 = new Category();
+        $category2 = new Category();
+
+        // Act
+        $book->addCategory($category1);
+        self::assertCount(1, $book->getCategories());
+        $book->addCategory($category2);
+        self::assertCount(2, $book->getCategories());
+        $book->removeCategory($category1);
+
+        // Assert
+        // self::assertCount(2, $book->getCategories());
+        self::assertCount(1, $book->getCategories());
+        self::assertFalse($book->getCategories()->contains($category1));
+        self::assertTrue($book->getCategories()->contains($category2));
+        
+    }
+
 }
