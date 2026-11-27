@@ -82,8 +82,9 @@ class BookTest extends TestCase
         $actual  = "test";
         $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setTitle($expect);
+        $testBook->setTitle($actual);
         //2 Act
+        $actual=$testBook->getTitle();
         //3 Assert
         self::assertNotSame($expect , $actual );
     }
@@ -97,8 +98,9 @@ class BookTest extends TestCase
         $actual  = "test";
         $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setResume($expect);
+        $testBook->setResume($actual);
         //2 Act
+        $actual=$testBook->getResume();
         //3 Assert
         self::assertNotSame($expect , $actual );
     }
@@ -112,8 +114,9 @@ class BookTest extends TestCase
         $actual  = "test";
         $expect = "test2";
         //setter l'attribut
-        $resultat = $testBook->setAuthor($expect);
+        $testBook->setAuthor($actual);
         //2 Act
+        $actual=$testBook->getAuthor();
         //3 Assert
         self::assertNotSame($expect , $actual );
     }
@@ -127,9 +130,57 @@ class BookTest extends TestCase
         $actual  = new DateTimeImmutable();
         $expect = new DateTimeImmutable("1982-09-21");
         //setter l'attribut
-        $resultat = $testBook->setPublishAt($expect);
+        $testBook->setPublishAt($actual);
         //2 Act
+        $actual=$testBook->getPublishAt();
         //3 Assert
         self::assertNotSame($expect , $actual );
+    }
+
+    // Erreur de format
+    public function testTitreTypeErrorException(): void
+    {
+        //1 Arrange
+        //créer un objet vide
+        $testBook = new Book();
+        //Expect
+        $this->expectException(\TypeError::class);
+        //2 Act
+        $testBook->setTitle(["tests"]);
+    }
+
+    public function testResumTypeErrorException(): void
+    {
+        //1 Arrange
+        //créer un objet vide
+        $testBook = new Book();
+         //créer un objet vide
+        $testBook = new Book();
+        //Expect
+        $this->expectException(\TypeError::class);
+        //2 Act
+        $testBook->setResume(["tests"]);
+    }
+
+    public function testAuthorTypeErrorException(): void
+    {
+        //1 Arrange
+        //créer un objet vide
+        $testBook = new Book();
+        //Expect
+        $this->expectException(\TypeError::class);
+        //2 Act
+        $testBook->setAuthor(["tests"]);
+    }
+
+    public function testPublishAtTypeErrorException(): void
+    {
+        //1 Arrange
+        //créer un objet vide
+        $testBook = new Book();
+        //Expect
+        $this->expectException(\TypeError::class);
+        //2 Act
+        $testBook->setPublishAt(["tests"]);
     }
 }
